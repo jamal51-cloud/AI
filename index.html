@@ -390,7 +390,7 @@ async function sendMessage(){
         'X-Title':'NOVA AI'
       },
       body: JSON.stringify({
-        model:'openai/gpt-4.1-mini',
+        model:'deepseek/deepseek-chat-v3-0324:free',
         messages:[
           {
             role:'system',
@@ -406,12 +406,18 @@ async function sendMessage(){
 
     const data = await response.json();
 
+    if(!response.ok){
+      console.log(data);
+      typing.innerText = data.error?.message || 'API Error';
+      return;
+    }
+
     typing.remove();
 
     const aiMsg = document.createElement('div');
     aiMsg.className = 'message ai';
 
-    aiMsg.innerText = data.choices?.[0]?.message?.content || 'No response.';
+    aiMsg.innerText = data.choices?.[0]?.message?.content || 'AI tidak memberi respon.';
 
     chatBody.appendChild(aiMsg);
 
@@ -433,4 +439,4 @@ document.getElementById('userInput').addEventListener('keypress', function(e){
   }
 });
 </script></body>
-</html>
+    </html>
