@@ -385,7 +385,9 @@ async function sendMessage(){
       method:'POST',
       headers:{
         'Authorization': 'Bearer ' + API_KEY,
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'HTTP-Referer':'https://your-site.vercel.app',
+        'X-Title':'NOVA AI'
       },
       body: JSON.stringify({
         model:'openai/gpt-4.1-mini',
@@ -417,7 +419,7 @@ async function sendMessage(){
 
   }catch(err){
 
-    typing.innerText = 'Error connecting AI API.';
+    typing.innerText = 'AI gagal connect. Cek API KEY OpenRouter kamu.';
     console.log(err);
 
   }
